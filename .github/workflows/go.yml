@@ -31,6 +31,25 @@ jobs:
     - name: Revive Action
       uses: morphy2k/revive-action@v2.4.1
 
+    - name: Run run script (trace)
+      shell: bash
+      env:
+        GIN_MODE: release
+        DEBUG: ""
+        IGNORE_LOCAL_GO: ""
+        GO_VERSION: 1.19.x
+      run: |
+        set -Eeuo pipefail
+        echo "PWD: $(pwd)"
+        echo "BASH version: $BASH_VERSION"
+        echo "Env: GIN_MODE=${GIN_MODE:-}, DEBUG=${DEBUG:-}, IGNORE_LOCAL_GO=${IGNORE_LOCAL_GO:-}, GO_VERSION=${GO_VERSION:-}"
+        ls -la
+        file src/run || true
+        sed -n '1,5p' src/run || true
+        echo "--- START RUN ---"
+        bash -x src/run
+        echo "--- END RUN ---"
+
     - name: Staticcheck
       uses: dominikh/staticcheck-action@v1.3.0
 
