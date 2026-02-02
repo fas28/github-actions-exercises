@@ -20,6 +20,13 @@ jobs:
       checks: write
       
     steps:
+    
+    - name: Debug repo context
+      run: |
+        echo "Repository: ${{ github.repository }}"
+        echo "Ref:        ${{ github.ref }}"
+        echo "SHA:        ${{ github.sha }}"
+
     - uses: actions/checkout@v4
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
