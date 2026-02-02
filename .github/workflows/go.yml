@@ -31,22 +31,15 @@ jobs:
     - name: Revive Action
       uses: morphy2k/revive-action@v2.4.1
       
-    - name: Debug environment before Staticcheck
+    - name: Print Staticcheck supported Go version
       run: |
-        echo "PWD: $(pwd)"
-        echo "Go version:"
-        go version
-        echo "Go env:"
-        go env
-        echo "Directory tree:"
-        ls -R .
-
-    - name: Staticcheck (debug)
-      uses: dominikh/staticcheck-action@v1.3.0
-      with:
-        version: "latest"
-      env:
-        STATICCHECK_DEBUG: "1"
+        curl -s https://api.github.com/repos/dominikh/go-tools/releases/latest | jq '.tag_name'
+        - name: Staticcheck (debug)
+          uses: dominikh/staticcheck-action@v1.3.0
+          with:
+            version: "latest"
+          env:
+            STATICCHECK_DEBUG: "1"
 
     - name: Build
       run: |
