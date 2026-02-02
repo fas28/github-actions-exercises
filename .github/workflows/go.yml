@@ -28,12 +28,9 @@ jobs:
     - name: Revive Action
       uses: morphy2k/revive-action@v2.4.1
 
-    - name: Print Staticcheck supported Go version
-      run: |
-        curl -s https://api.github.com/repos/dominikh/go-tools/releases/latest | jq '.tag_name'
-    
-        - name: Staticcheck
-          uses: dominikh/staticcheck-action@v1.3.0
+
+    - name: Staticcheck
+      uses: dominikh/staticcheck-action@v1.3.0
 
     - name: Build
       run: |
